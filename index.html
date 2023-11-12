@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de promedio de notas - Janinson</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h1>Calculadora de promedio de notas - Janinson</h1>
+        <label for="nota1">Nota 1 (15%):</label>
+        <input type="number" id="nota1" step="0.01" min="0" max="5" required>
+
+        <label for="nota2">Nota 2 (15%):</label>
+        <input type="number" id="nota2" step="0.01" min="0" max="5" required>
+
+        <label for="nota3">Nota 3 (15%):</label>
+        <input type="number" id="nota3" step="0.01" min="0" max="5" required>
+
+        <label for="nota4">Nota 4 (30%):</label>
+        <input type="number" id="nota4" step="0.01" min="0" max="5" required>
+
+        <button type="button" onclick="calcularPromedio()">Calcular promedio</button>
+
+        <h2 id="resultado"></h2>
+    </form>
+
+    <script>
+        function calcularPromedio() {
+            // Obtener los valores de las notas
+            const nota1 = parseFloat(document.getElementById('nota1').value);
+            const nota2 = parseFloat(document.getElementById('nota2').value);
+            const nota3 = parseFloat(document.getElementById('nota3').value);
+            const nota4 = parseFloat(document.getElementById('nota4').value);
+
+            // Verificar si las notas son números válidos
+            if (isNaN(nota1) || isNaN(nota2) || isNaN(nota3) || isNaN(nota4)) {
+                alert('Ingresa números válidos en todos los campos.');
+                return;
+            }
+
+            // Verificar si las notas están dentro del rango permitido
+            if (nota1 < 0 || nota1 > 5 || nota2 < 0 || nota2 > 5 || nota3 < 0 || nota3 > 5 || nota4 < 0 || nota4 > 5) {
+                alert('Las notas deben estar entre 0.0 y 5.0.');
+                return;
+            }
+
+            // Calcular el promedio ponderado
+            const promedioPonderado = (nota1 * 0.15 + nota2 * 0.15 + nota3 * 0.15 + nota4 * 0.30) / 0.75;
+
+            // Calcular la nota necesaria para alcanzar un promedio de 3.0
+            const notaNecesaria = (3.0 - promedioPonderado) / 0.25;
+
+            // Redondear el promedio a dos decimales
+            const promedioPonderadoRedondeado = promedioPonderado.toFixed(2);
+
+            // Redondear la nota necesaria a dos decimales
+            const notaNecesariaRedondeada = notaNecesaria.toFixed(2);
+
+            // Mostrar el resultado
+            document.getElementById('resultado').innerText = `El promedio ponderado es: ${promedioPonderadoRedondeado}`;
+        }
+    </script>
+</body>
+</html>
